@@ -1,4 +1,3 @@
-# FROM homebrew/brew:4.0.14 as build
 FROM emscripten/emsdk:3.1.36 as build
 
 WORKDIR /tmp
