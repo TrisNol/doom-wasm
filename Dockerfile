@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get install dh-autoreconf autogen automake libtool shtool pkg-config -y
 
 RUN git clone https://github.com/cloudflare/doom-wasm.git
-WORKDIR ./doom-wasm
+WORKDIR /tmp/doom-wasm
 RUN ls -l
 RUN ./scripts/clean.sh
 RUN ./scripts/build.sh
@@ -16,7 +16,7 @@ WORKDIR /opt
 COPY --from=build /tmp/doom-wasm ./
 RUN apt-get update && apt-get install curl python3 -y
 RUN curl -o ./src/doom1.wad https://distro.ibiblio.org/slitaz/sources/packages/d/doom1.wad
-WORKDIR src
+WORKDIR /opt/src
 
 EXPOSE 8000
 CMD python3 -m http.server 8000 
