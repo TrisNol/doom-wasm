@@ -12,3 +12,6 @@ services:
       - 8080:8000
 
 ```
+## License
+
+The repository is largely based on [cloudflare/doom-wasm](https://github.com/cloudflare/doom-wasm) and licensed under the [GNU General Public License v2.0](https://github.com/TrisNol/doom-wasm/blob/main/LICENSE)
