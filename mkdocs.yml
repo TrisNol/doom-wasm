@@ -16,4 +16,4 @@ theme:
 
 nav:
   - Home: "README.md"
-  - License: "../LICENSE.md"
+  - License: "LICENSE.md"
