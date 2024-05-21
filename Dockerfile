@@ -12,11 +12,24 @@ RUN ./scripts/build.sh
 
 FROM ubuntu:22.04
 
-WORKDIR /opt
-COPY --from=build /tmp/doom-wasm ./
-RUN apt-get update && apt-get install curl python3 -y
-RUN curl -o ./src/doom1.wad https://distro.ibiblio.org/slitaz/sources/packages/d/doom1.wad
-WORKDIR /opt/src
+ARG USERNAME=doom
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+ARG USER_WORKDIR=/home/$USERNAME/doom-wasm
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -d /home/$USERNAME -m $USERNAME \
+    && apt-get update \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+COPY --from=build --chown=$USERNAME:$USERNAME /tmp/doom-wasm $USER_WORKDIR
+
+USER $USERNAME
+
+WORKDIR $USER_WORKDIR/src
+RUN sudo apt-get update && sudo apt-get install curl python3 -y
+RUN curl -o ./doom1.wad https://distro.ibiblio.org/slitaz/sources/packages/d/doom1.wad
 
 EXPOSE 8000
 CMD python3 -m http.server 8000 
