@@ -9,7 +9,7 @@ RUN ls -l
 RUN ./scripts/clean.sh
 RUN ./scripts/build.sh
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ARG USERNAME=doom
 ARG USER_UID=1000
