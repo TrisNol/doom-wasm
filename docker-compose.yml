@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   doom-wasm:
     image: ghcr.io/trisnol/doom-wasm:main
