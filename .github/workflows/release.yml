@@ -40,3 +40,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Clean up old images
+        uses: trisnol/delete-untagged-images@main
+        with:
+          owner: ${{ github.repository_owner }}
+          repository: ${{ github.event.repository.name }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
