@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:3.1.36 AS build
+FROM emscripten/emsdk:3.1.61 AS build
 
 WORKDIR /tmp
 RUN apt update && apt install dh-autoreconf autogen automake libtool shtool pkg-config -y && apt clean
@@ -9,10 +9,10 @@ RUN ls -l
 RUN ./scripts/clean.sh
 RUN ./scripts/build.sh
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ARG USERNAME=doom
-ARG USER_UID=1000
+ARG USER_UID=1024
 ARG USER_GID=$USER_UID
 ARG USER_WORKDIR=/home/$USERNAME/doom-wasm
 
