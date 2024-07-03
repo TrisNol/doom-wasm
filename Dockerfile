@@ -1,4 +1,4 @@
-FROM emscripten/emsdk:3.1.61 AS build
+FROM emscripten/emsdk:3.1.62 AS build
 
 WORKDIR /tmp
 RUN apt update && apt install dh-autoreconf autogen automake libtool shtool pkg-config -y && apt clean
